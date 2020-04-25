@@ -25,8 +25,8 @@ public class Account {
     @JoinColumn(name = "account_id")
     private Profile profile;
 
-    @OneToOne(mappedBy = "account")
-    private Account wallet;
+    @OneToOne(mappedBy = "owner")
+    private Wallet wallet;
 
     public Account() {
     }
@@ -63,11 +63,11 @@ public class Account {
         this.profile = profile;
     }
 
-    public Account getWallet() {
+    public Wallet getWallet() {
         return wallet;
     }
 
-    public void setWallet(Account wallet) {
+    public void setWallet(Wallet wallet) {
         this.wallet = wallet;
     }
 }

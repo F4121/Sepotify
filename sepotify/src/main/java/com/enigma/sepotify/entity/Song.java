@@ -40,7 +40,7 @@ public class Song {
     private List<Playlist> playlists = new ArrayList<>();
 
     //relasi transaction
-    @OneToMany(mappedBy = "songs")
+    @OneToMany(mappedBy = "item")
     private List<Transaction> transactions = new ArrayList<>();
 
     public Song() {
