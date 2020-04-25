@@ -1,5 +1,7 @@
 package com.enigma.sepotify.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +9,10 @@ import java.util.List;
 @Entity
 @Table(name = "mst_playlist")
 public class Playlist {
+
+    @Id
+    @GeneratedValue(generator = "playlist_uuid", strategy = GenerationType.IDENTITY)
+    @GenericGenerator(name = "playlist_uuid", strategy = "uuid")
     private String id;
     private String name;
     private Boolean isPublic;

@@ -18,6 +18,7 @@ public class Profile {
     private String middleName;
     private String lastName;
 
+    @Enumerated(EnumType.STRING)
     private GenderEnum gender;
 
     private String email;

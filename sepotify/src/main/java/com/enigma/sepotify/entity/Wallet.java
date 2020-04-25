@@ -1,5 +1,7 @@
 package com.enigma.sepotify.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +9,11 @@ import java.util.List;
 @Entity
 @Table(name = "mst_wallet")
 public class Wallet {
+
+
+    @Id
+    @GeneratedValue(generator = "wallet_uuid", strategy = GenerationType.IDENTITY)
+    @GenericGenerator(name = "wallet_uuid", strategy = "uuid")
     private String id;
     private Double ballance;
 
@@ -23,6 +30,7 @@ public class Wallet {
     private List<WalletHistory> histories = new ArrayList<>();
 
     public Wallet() {
+
     }
 
     public String getId() {

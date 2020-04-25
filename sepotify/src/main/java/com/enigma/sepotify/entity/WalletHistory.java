@@ -1,17 +1,18 @@
 package com.enigma.sepotify.entity;
 
 import com.enigma.sepotify.enums.HistoryTypeEnum;
+import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
 @Table(name = "mst_wallet_history")
 public class WalletHistory {
 
+    @Id
+    @GeneratedValue(generator = "wallethistory_uuid", strategy = GenerationType.IDENTITY)
+    @GenericGenerator(name = "wallethistory_uuid", strategy = "uuid")
     private String id;
     //enums
     private HistoryTypeEnum type;
