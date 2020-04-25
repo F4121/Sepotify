@@ -11,8 +11,8 @@ import java.sql.Timestamp;
 public class WalletHistory {
 
     @Id
-    @GeneratedValue(generator = "wallethistory_uuid", strategy = GenerationType.IDENTITY)
-    @GenericGenerator(name = "wallethistory_uuid", strategy = "uuid")
+    @GeneratedValue(generator = "wallet_history_uuid", strategy = GenerationType.IDENTITY)
+    @GenericGenerator(name = "wallet_history_uuid", strategy = "uuid")
     private String id;
     //enums
     private HistoryTypeEnum type;
