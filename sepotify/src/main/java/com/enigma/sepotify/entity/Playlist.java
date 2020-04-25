@@ -26,8 +26,8 @@ public class Playlist {
     private List<Song> songs = new ArrayList<>();
 
     @ManyToOne
-    @JoinColumn(name = "author_id")
-    private Account author;
+    @JoinColumn(name = "account_id")
+    private Account account;
 
     public Playlist() {
     }
@@ -64,11 +64,11 @@ public class Playlist {
         this.songs = songs;
     }
 
-    public Account getAuthor() {
-        return author;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setAuthor(Account author) {
-        this.author = author;
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }

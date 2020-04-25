@@ -26,7 +26,8 @@ public class Profile {
     private Date birthdate;
     private String location;
 
-    @OneToOne(mappedBy = "profile")
+    @OneToOne
+    @JoinColumn(name = "account_id")
     private Account account;
 
     public Profile() {

@@ -1,5 +1,6 @@
 package com.enigma.sepotify.entity;
 
+import com.enigma.sepotify.enums.GenderEnum;
 import com.enigma.sepotify.enums.HistoryTypeEnum;
 import org.hibernate.annotations.GenericGenerator;
 

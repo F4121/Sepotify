@@ -17,12 +17,11 @@ public class Account {
     private Boolean isActive;
 
     //relasi playlist
-    @OneToMany(mappedBy = "author")
+    @OneToMany(mappedBy = "account")
     private List<Playlist> playlists = new ArrayList<>();
 
     //relasi profile
-    @OneToOne
-    @JoinColumn(name = "account_id")
+    @OneToOne(mappedBy = "account")
     private Profile profile;
 
     @OneToOne(mappedBy = "owner")
