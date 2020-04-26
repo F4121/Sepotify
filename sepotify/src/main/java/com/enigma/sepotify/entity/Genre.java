@@ -1,5 +1,7 @@
 package com.enigma.sepotify.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -13,7 +15,7 @@ public class Genre {
     @Id
     @GeneratedValue(generator = "genre_uuid", strategy = GenerationType.IDENTITY)
     @GenericGenerator(name = "genre_uuid", strategy = "uuid")
-    private Integer id;
+    private String id;
 
     private String name;
 
@@ -24,11 +26,11 @@ public class Genre {
     public Genre() {
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

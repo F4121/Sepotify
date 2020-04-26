@@ -16,6 +16,7 @@ public class WalletHistory {
     @GenericGenerator(name = "wallet_history_uuid", strategy = "uuid")
     private String id;
     //enums
+    @Enumerated(EnumType.STRING)
     private HistoryTypeEnum type;
     private Double amount;
     private Timestamp trxDate;

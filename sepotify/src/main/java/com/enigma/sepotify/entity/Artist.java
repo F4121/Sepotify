@@ -1,6 +1,7 @@
 package com.enigma.sepotify.entity;
 
 import com.enigma.sepotify.enums.GenderEnum;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -15,10 +16,12 @@ public class Artist {
     @GeneratedValue(generator = "artist_uuid", strategy = GenerationType.IDENTITY)
     @GenericGenerator(name = "artist_uuid", strategy = "uuid")
     private String id;
-
     private String name;
     private Integer debutYear;
+
+    @Enumerated(EnumType.STRING)
     private GenderEnum genderEnum;
+
     private String biography;
     private String photo;
 

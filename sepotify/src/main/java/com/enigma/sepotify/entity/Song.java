@@ -1,5 +1,8 @@
 package com.enigma.sepotify.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -21,29 +24,35 @@ public class Song {
     //relasi genre
     @ManyToOne
     @JoinColumn(name = "genre_id")
+    @JsonIgnoreProperties("songs")
     private Genre genre;
 
     //relasi album
     @ManyToOne
     @JoinColumn(name = "album_id")
+    @JsonIgnoreProperties("songs")
     private Album album;
 
     //relasi artist
     @ManyToOne
     @JoinColumn(name = "artist_id")
+    @JsonIgnore
     private Artist artist;
 
     private Double price;
 
     //relasi playlist
     @ManyToMany(mappedBy = "songs")
+    @JsonIgnoreProperties("songs")
     private List<Playlist> playlists = new ArrayList<>();
 
     //relasi transaction
     @OneToMany(mappedBy = "item")
+    @JsonIgnoreProperties("item")
     private List<Transaction> transactions = new ArrayList<>();
 
     public Song() {
+
     }
 
     public String getId() {

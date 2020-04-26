@@ -1,6 +1,7 @@
 package com.enigma.sepotify.entity;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -14,10 +15,10 @@ public class Playlist {
     @GeneratedValue(generator = "playlist_uuid", strategy = GenerationType.IDENTITY)
     @GenericGenerator(name = "playlist_uuid", strategy = "uuid")
     private String id;
-
     private String name;
-    private Boolean isPublic;
 
+    @Type(type = "true_false")
+    private Boolean isPublic;
     //relasi song
     @ManyToMany
 	@JoinTable(name = "playlist_has_song",
@@ -30,6 +31,7 @@ public class Playlist {
     private Account account;
 
     public Playlist() {
+
     }
 
     public String getId() {
