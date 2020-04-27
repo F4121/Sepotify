@@ -26,7 +26,6 @@ public class WalletHistoryController {
 
     @DeleteMapping
     public void deleteAccount(@RequestBody WalletHistory walletHistory){
-        System.out.println("test conflict");
         walletHistoryService.deleteWalletHistory(walletHistory.getId());
     }
 }
