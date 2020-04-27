@@ -1,6 +1,11 @@
 package com.enigma.sepotify.entity;
 
 import com.enigma.sepotify.enums.GenderEnum;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -8,7 +13,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "mst_profile")
-public class Profile {
+public class    Profile {
 
     @Id
     @GeneratedValue(generator = "profile_uuid", strategy = GenerationType.IDENTITY)
@@ -23,11 +28,14 @@ public class Profile {
 
     private String email;
     private String phone;
+
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date birthdate;
     private String location;
 
     @OneToOne
     @JoinColumn(name = "account_id")
+    @JsonIgnoreProperties(value = {"profile","active"})
     private Account account;
 
     public Profile() {
