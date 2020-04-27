@@ -1,5 +1,6 @@
 package com.enigma.sepotify.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -20,6 +21,7 @@ public class Album {
 
     //relasi song
     @OneToMany(mappedBy = "album")
+    @JsonIgnoreProperties(value = {"album"})
     private List<Song> songs = new ArrayList<>();
 
     private Double discount;
