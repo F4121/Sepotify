@@ -1,5 +1,6 @@
 package com.enigma.sepotify.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -20,10 +21,12 @@ public class Transaction {
 
     @ManyToOne
     @JoinColumn(name = "item_id")
+    @JsonIgnoreProperties(value = {"transactions"})
     private Song item;
 
     @ManyToOne
     @JoinColumn(name = "wallet_id")
+    @JsonIgnoreProperties(value = {"transactions"})
     private Wallet wallet;
 
     public Transaction() {
