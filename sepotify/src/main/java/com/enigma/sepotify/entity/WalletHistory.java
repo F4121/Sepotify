@@ -2,6 +2,7 @@ package com.enigma.sepotify.entity;
 
 import com.enigma.sepotify.enums.GenderEnum;
 import com.enigma.sepotify.enums.HistoryTypeEnum;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -24,6 +25,7 @@ public class WalletHistory {
     //relasi wallet
     @ManyToOne
     @JoinColumn(name = "wallet_id")
+    @JsonIgnoreProperties(value = {"histories"})
     private Wallet wallet;
 
     public WalletHistory() {
