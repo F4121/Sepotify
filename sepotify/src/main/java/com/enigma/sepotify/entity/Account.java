@@ -1,5 +1,7 @@
 package com.enigma.sepotify.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -14,6 +16,8 @@ public class Account {
     @GeneratedValue(generator = "account_uuid", strategy = GenerationType.IDENTITY)
     @GenericGenerator(name = "account_uuid", strategy = "uuid")
     private String id;
+
+    @JsonProperty
     private Boolean isActive;
 
     //relasi playlist
@@ -22,9 +26,11 @@ public class Account {
 
     //relasi profile
     @OneToOne(mappedBy = "account")
+    @JsonIgnoreProperties(value = {"account"})
     private Profile profile;
 
     @OneToOne(mappedBy = "owner")
+    @JsonIgnoreProperties(value = {"owner","histories","topUp","withdrawl","transactions"})
     private Wallet wallet;
 
     public Account() {
