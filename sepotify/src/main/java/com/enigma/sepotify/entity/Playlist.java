@@ -19,6 +19,7 @@ public class Playlist {
 
     @Type(type = "true_false")
     private Boolean isPublic;
+
     //relasi song
     @ManyToMany
 	@JoinTable(name = "playlist_has_song",

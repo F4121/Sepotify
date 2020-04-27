@@ -24,14 +24,18 @@ public class PlaylistServiceDBImpl implements PlaylistService{
 
     @Override
     public void savePlaylist(Playlist playlist) {
-        Account account = accountService.getAccount(playlist.getAccount().getId());
-        if (account==null){
-            throw new RuntimeException("Account with id " + playlist.getAccount().getId() + " Not Found");
-        }else{
-            if (account.getActive()==false){
-                throw new AccountIsNotActiveException(playlist.getAccount().getId());
-            }else{
-                playlistRepository.save(playlist);
+        if (playlist.getId()!=null){
+            playlistRepository.save(playlist);
+        }else {
+            Account account = accountService.getAccount(playlist.getAccount().getId());
+            if (account == null) {
+                throw new RuntimeException("Account with id " + playlist.getAccount().getId() + " Not Found");
+            } else {
+                if (account.getActive() == false) {
+                    throw new AccountIsNotActiveException(playlist.getAccount().getId());
+                } else {
+                    playlistRepository.save(playlist);
+                }
             }
         }
     }

@@ -32,6 +32,7 @@ public class ArtistJpaSpecification {
                         predicates.add(songTitlePredicate);
                     }
                 }
+                criteriaQuery.distinct(true);
                 return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
             }
         };

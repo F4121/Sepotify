@@ -34,6 +34,7 @@ public class SongJpaSpesification {
                                     .lower(songArtistJoin.get("name")),"%"+searchForm.getArtistname().toLowerCase()+"%");
                     predicates.add(artistNamePredicate);
                 }
+                criteriaQuery.distinct(true);
                 return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
             }
         };
