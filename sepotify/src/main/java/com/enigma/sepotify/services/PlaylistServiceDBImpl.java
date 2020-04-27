@@ -1,7 +1,9 @@
 package com.enigma.sepotify.services;
 
+import com.enigma.sepotify.entity.Account;
 import com.enigma.sepotify.entity.Genre;
 import com.enigma.sepotify.entity.Playlist;
+import com.enigma.sepotify.exception.AccountIsNotActiveException;
 import com.enigma.sepotify.exception.ResourceNotFoundException;
 import com.enigma.sepotify.repository.PlaylistRepository;
 import com.enigma.sepotify.spesification.PlaylistJpaSpecification;
@@ -16,9 +18,22 @@ public class PlaylistServiceDBImpl implements PlaylistService{
     @Autowired
     PlaylistRepository playlistRepository;
 
+    @Autowired
+    AccountService accountService;
+
+
     @Override
     public void savePlaylist(Playlist playlist) {
-        playlistRepository.save(playlist);
+        Account account = accountService.getAccount(playlist.getAccount().getId());
+        if (account==null){
+            throw new RuntimeException("Account with id " + playlist.getAccount().getId() + " Not Found");
+        }else{
+            if (account.getActive()==false){
+                throw new AccountIsNotActiveException(playlist.getAccount().getId());
+            }else{
+                playlistRepository.save(playlist);
+            }
+        }
     }
 
     @Override
