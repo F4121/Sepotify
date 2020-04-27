@@ -45,6 +45,11 @@ public class SongServiceDBImpl implements SongService{
     @Override
     public Page<Song> searchSong(Pageable pageable, Song searchForm) {
         Page<Song> songs = songRepository.findAll(SongJpaSpesification.findByCriterias(searchForm), pageable);
+        for (Song song: songs) {
+            int second = song.getDuration() % 60;
+            int minutes = song.getDuration() / 60;
+            song.setMinutes(minutes + ":" + second);
+        }
         return songs;
     }
 }
