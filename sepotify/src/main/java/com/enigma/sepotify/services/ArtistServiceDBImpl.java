@@ -53,8 +53,11 @@ public class ArtistServiceDBImpl implements ArtistService{
     @Override
     public Artist getArtist(String id) {
         Artist artist;
-        if (artistRepository.findById(id).isPresent()) artist = artistRepository.findById(id).get();
-        else throw new ResourceNotFoundException(id, Artist.class);
+        if (artistRepository.findById(id).isPresent()) {
+            artist = artistRepository.findById(id).get();
+        }else{
+            throw new ResourceNotFoundException(id, Artist.class);
+        }
         return artist;
     }
 
