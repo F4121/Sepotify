@@ -26,6 +26,7 @@ public class WalletHistoryController {
 
     @DeleteMapping
     public void deleteAccount(@RequestBody WalletHistory walletHistory){
+        //Coba conflict
         walletHistoryService.deleteWalletHistory(walletHistory.getId());
     }
 }
