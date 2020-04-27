@@ -1,7 +1,6 @@
 package com.enigma.sepotify.controller;
 
 import com.enigma.sepotify.entity.Album;
-import com.enigma.sepotify.entity.Artist;
 import com.enigma.sepotify.services.AlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,11 +14,12 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/album")
 public class AlbumController {
+
     @Autowired
     AlbumService albumService;
 
     @GetMapping("/{id}")
-    public Album getArtistById(@PathVariable String id){
+    public Album getAlbumById(@PathVariable String id){
         return albumService.getAlbum(id);
     }
 
