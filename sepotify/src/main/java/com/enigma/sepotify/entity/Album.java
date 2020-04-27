@@ -26,6 +26,14 @@ public class Album {
     private String image;
 
     public Album() {
+
+    }
+
+    public Album(String title, String description, Integer releaseYear, Double discount) {
+        this.title = title;
+        this.description = description;
+        this.releaseYear = releaseYear;
+        this.discount = discount;
     }
 
     public String getId() {

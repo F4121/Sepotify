@@ -26,18 +26,6 @@ public class AlbumJpaSpecification {
                                         .lower(root.get("title")),"%"+searchForm.getTitle().toLowerCase()+"%");
                         predicates.add(albumNamePredicate);
                     }
-//                    if (!StringUtils.isEmpty(searchForm.getOriginPlace())) {
-//                        final Predicate artistOriginPlacePredicate = criteriaBuilder
-//                                .like(criteriaBuilder
-//                                        .lower(root.get("originPlace")),"%"+searchForm.getOriginPlace().toLowerCase()+"%");
-//                        predicates.add(artistOriginPlacePredicate);
-//                    }
-//                    if (!StringUtils.isEmpty(searchForm.getType())) {
-//                        final Predicate artistTypePredicate = criteriaBuilder
-//                                .like(criteriaBuilder
-//                                        .lower(root.get("type")),"%"+searchForm.getType().toLowerCase()+"%");
-//                        predicates.add(artistTypePredicate);
-//                    }
                 }
                 return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
             }

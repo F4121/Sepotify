@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.concurrent.TimeUnit;
+
 @Service
 public class SongServiceDBImpl implements SongService{
 
@@ -23,8 +25,14 @@ public class SongServiceDBImpl implements SongService{
     @Override
     public Song getSong(String id) {
         Song song;
-        if (songRepository.findById(id).isPresent()) song = songRepository.findById(id).get();
-        else throw new ResourceNotFoundException(id, Song.class);
+        if (songRepository.findById(id).isPresent()){
+            song = songRepository.findById(id).get();
+            int second = song.getDuration() % 60;
+            int minutes = song.getDuration() / 60;
+            song.setMinutes(minutes + ":" + second);
+        }else{
+            throw new ResourceNotFoundException(id, Song.class);
+        }
         return song;
     }
 

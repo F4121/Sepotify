@@ -21,6 +21,9 @@ public class Song {
     private Integer releaseYear;
     private Integer duration;
 
+    @Transient
+    private String minutes;
+
     //relasi genre
     @ManyToOne
     @JoinColumn(name = "genre_id")
@@ -133,5 +136,13 @@ public class Song {
 
     public void setTransactions(List<Transaction> transactions) {
         this.transactions = transactions;
+    }
+
+    public String getMinutes() {
+        return minutes;
+    }
+
+    public void setMinutes(String minutes) {
+        this.minutes = minutes;
     }
 }
