@@ -27,6 +27,7 @@ public class Artist {
 
     //Relasi song
     @OneToMany(mappedBy = "artist")
+    @JsonIgnoreProperties(value = {"artist"})
     private List<Song> songs = new ArrayList<>();
 
     public Artist() {
