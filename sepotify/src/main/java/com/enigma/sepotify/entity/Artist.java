@@ -22,6 +22,9 @@ public class Artist {
     @Enumerated(EnumType.STRING)
     private GenderEnum genderEnum;
 
+    @Transient
+    private String title;
+
     private String biography;
     private String photo;
 
@@ -87,5 +90,13 @@ public class Artist {
 
     public void setSongs(List<Song> songs) {
         this.songs = songs;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

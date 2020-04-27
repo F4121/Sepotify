@@ -22,6 +22,9 @@ public class Song {
     private Integer duration;
 
     @Transient
+    private String artistname;
+
+    @Transient
     private String minutes;
 
     //relasi genre
@@ -144,5 +147,13 @@ public class Song {
 
     public void setMinutes(String minutes) {
         this.minutes = minutes;
+    }
+
+    public String getArtistname() {
+        return artistname;
+    }
+
+    public void setArtistname(String artistname) {
+        this.artistname = artistname;
     }
 }
