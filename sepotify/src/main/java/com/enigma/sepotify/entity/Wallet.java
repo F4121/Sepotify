@@ -1,5 +1,10 @@
 package com.enigma.sepotify.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -16,16 +21,27 @@ public class Wallet {
     private String id;
     private Double balance;
 
+    @Transient
+//    @JsonBackReference
+    private Double topUp;
+
+    @Transient
+//    @JsonBackReference
+    private Double withdrawl;
+
     @OneToOne
     @JoinColumn(name = "account_id")
+    @JsonIgnoreProperties(value = {"playlists","profile","wallet","active"})
     private Account owner;
 
     //relasi transactions
     @OneToMany(mappedBy = "wallet")
+    @JsonIgnoreProperties(value = {"wallet"})
     private List<Transaction> transactions = new ArrayList<>();
 
     //relasi wallethistory
     @OneToMany(mappedBy = "wallet")
+    @JsonIgnoreProperties(value = {"wallet"})
     private List<WalletHistory> histories = new ArrayList<>();
 
     public Wallet() {
@@ -70,5 +86,21 @@ public class Wallet {
 
     public void setHistories(List<WalletHistory> histories) {
         this.histories = histories;
+    }
+
+    public Double getTopUp() {
+        return topUp;
+    }
+
+    public void setTopUp(Double topUp) {
+        this.topUp = topUp;
+    }
+
+    public Double getWithdrawl() {
+        return withdrawl;
+    }
+
+    public void setWithdrawl(Double withdrawl) {
+        this.withdrawl = withdrawl;
     }
 }
