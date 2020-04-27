@@ -42,7 +42,7 @@ public class Song {
     //relasi artist
     @ManyToOne
     @JoinColumn(name = "artist_id")
-    @JsonIgnore
+    @JsonIgnoreProperties(value = {"songs"})
     private Artist artist;
 
     private Double price;
