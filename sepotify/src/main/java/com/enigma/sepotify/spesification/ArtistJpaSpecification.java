@@ -16,12 +16,20 @@ public class ArtistJpaSpecification {
             @Override
             public Predicate toPredicate(Root<Artist> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
                 final Collection<Predicate> predicates = new ArrayList<>();
+                Join<Artist, Song> artistSongJoin = root.join("songs",JoinType.INNER);
+
                 if (searchForm != null) {
                     if (!StringUtils.isEmpty(searchForm.getName())) {
                         final Predicate artistNamePredicate = criteriaBuilder
                                 .like(criteriaBuilder
                                         .lower(root.get("name")),"%"+searchForm.getName().toLowerCase()+"%");
                         predicates.add(artistNamePredicate);
+                    }
+                    if (!StringUtils.isEmpty(searchForm.getTitle())){
+                        final Predicate songTitlePredicate = criteriaBuilder
+                                .like(criteriaBuilder
+                                        .lower(artistSongJoin.get("title")),"%"+ searchForm.getTitle()  +"%");
+                        predicates.add(songTitlePredicate);
                     }
                 }
                 return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
