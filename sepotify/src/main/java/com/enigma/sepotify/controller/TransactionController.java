@@ -20,19 +20,12 @@ public class TransactionController {
     }
 
     @PostMapping
-    public Transaction saveTransaction(@RequestBody Transaction transaction){
-        return transactionService.saveTransaction(transaction);
+    public void saveTransaction(@RequestBody Transaction transaction){
+        transactionService.saveTransaction(transaction);
     }
 
-//    @PostMapping(value = "/album")
-//    public void saveUpWallet(@RequestBody Wallet wallet){
-//        transactionService.saveTransaction(transaction);
-//    }
-
-//    @PostMapping(value = "/withdrawl")
-//    public void withDrawlWallet(@RequestBody Wallet wallet){
-//        Double lastBalance = walletService.getWallet(wallet.getId()).getBalance();
-//        wallet.setBalance(lastBalance - wallet.getWithdrawl());
-//        walletService.withdrawlWallet(wallet);
-//    }
+    @PostMapping("/album")
+    public void saveAlbumTransaction(@RequestBody Transaction transaction){
+        transactionService.saveAlbumTransaction(transaction);
+    }
 }

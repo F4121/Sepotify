@@ -5,6 +5,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "mst_transaction")
@@ -23,6 +25,12 @@ public class Transaction {
     @JoinColumn(name = "item_id")
     @JsonIgnoreProperties(value = {"transactions"})
     private Song item;
+
+    @Transient
+    private String album;
+
+    @Transient
+    private List<Song> items = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "wallet_id")
@@ -78,5 +86,21 @@ public class Transaction {
 
     public void setWallet(Wallet wallet) {
         this.wallet = wallet;
+    }
+
+    public List<Song> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Song> items) {
+        this.items = items;
+    }
+
+    public String getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(String album) {
+        this.album = album;
     }
 }
