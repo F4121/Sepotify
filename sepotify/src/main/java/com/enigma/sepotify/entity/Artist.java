@@ -1,6 +1,7 @@
 package com.enigma.sepotify.entity;
 
 import com.enigma.sepotify.enums.GenderEnum;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -23,6 +24,7 @@ public class Artist {
     private GenderEnum genderEnum;
 
     @Transient
+    @JsonBackReference(value = "title-song")
     private String title;
 
     private String biography;
