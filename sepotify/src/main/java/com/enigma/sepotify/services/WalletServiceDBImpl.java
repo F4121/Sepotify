@@ -37,8 +37,9 @@ public class WalletServiceDBImpl implements WalletService {
 
     @Override
     public void topUpWallet(Wallet wallet) {
-        this.isOwnerActive(wallet);
+        Account owner = this.isOwnerActive(wallet);
 
+        wallet.setOwner(owner);
         WalletHistory walletHistory = new WalletHistory();
         walletHistory.setAmount(wallet.getTopUp());
         walletHistory.setTrxDate(new Timestamp(new Date().getTime()));
@@ -51,8 +52,9 @@ public class WalletServiceDBImpl implements WalletService {
 
     @Override
     public void withdrawlWallet(Wallet wallet) {
-        this.isOwnerActive(wallet);
+        Account owner = this.isOwnerActive(wallet);
 
+        wallet.setOwner(owner);
         WalletHistory walletHistory = new WalletHistory();
         walletHistory.setAmount(wallet.getWithdrawl());
         walletHistory.setTrxDate(new Timestamp(new Date().getTime()));
@@ -65,9 +67,11 @@ public class WalletServiceDBImpl implements WalletService {
 
     @Override
     public void transactionlWallet(Wallet wallet, Double amount) {
-        this.isOwnerActive(wallet);
+        Account owner = this.isOwnerActive(wallet);
+
         //Set Wallet
         wallet.setBalance(wallet.getBalance() - amount);
+        wallet.setOwner(owner);
 
         //Wallet History
         WalletHistory walletHistory = new WalletHistory();
@@ -100,16 +104,16 @@ public class WalletServiceDBImpl implements WalletService {
         else throw new ResourceNotFoundException(id, Wallet.class);
     }
 
-    public Boolean isOwnerActive(Wallet wallet){
-        Boolean isActive = accountService.getAccount(wallet.getOwner().getId()).getActive();
-        if(!isActive){
+    public Account isOwnerActive(Wallet wallet){
+        Account account = accountService.getAccount(this.getWallet(wallet.getId()).getOwner().getId());
+        if(!account.getActive()){
             throw new AccountIsNotActiveException(wallet.getOwner().getId());
         }
-        return true;
+        return account;
     }
 
     public Boolean isWalletAlready(Wallet wallet){
-        Account account = accountService.getAccount(wallet.getOwner().getId());
+        Account account = accountService.getAccount(this.getWallet(wallet.getId()).getOwner().getId());
         if(account.getWallet() != null){
             throw new AccountIsAlreadyHaveWalletException(account.getId());
         }
