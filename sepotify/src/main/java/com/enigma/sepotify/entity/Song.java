@@ -20,10 +20,12 @@ public class Song {
     private String id;
     private String title;
     private Integer releaseYear;
+
+    @JsonBackReference(value = "duration")
     private Integer duration;
 
     @Transient
-    @JsonBackReference
+    @JsonBackReference(value = "artisname")
     private String artistname;
 
     @Transient
@@ -56,7 +58,8 @@ public class Song {
 
     //relasi transaction
     @OneToMany(mappedBy = "item")
-    @JsonIgnoreProperties(value = {"item","wallet"})
+    @JsonBackReference(value = "transactions")
+//    @JsonIgnoreProperties(value = {"item","wallet"})
     private List<Transaction> transactions = new ArrayList<>();
 
     public Song() {
