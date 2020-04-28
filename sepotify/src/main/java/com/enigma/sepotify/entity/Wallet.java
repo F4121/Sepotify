@@ -22,11 +22,11 @@ public class Wallet {
     private Double balance;
 
     @Transient
-//    @JsonBackReference
+    @JsonBackReference(value = "topUp-wallet")
     private Double topUp;
 
     @Transient
-//    @JsonBackReference
+    @JsonBackReference(value = "withdrawl-wallet")
     private Double withdrawl;
 
     @OneToOne
@@ -36,12 +36,13 @@ public class Wallet {
 
     //relasi transactions
     @OneToMany(mappedBy = "wallet")
-    @JsonIgnoreProperties(value = {"wallet"})
+    @JsonIgnoreProperties(value = {"wallet","item"})
     private List<Transaction> transactions = new ArrayList<>();
 
     //relasi wallethistory
     @OneToMany(mappedBy = "wallet")
-    @JsonIgnoreProperties(value = {"wallet"})
+    @JsonBackReference(value = "histories")
+//    @JsonIgnoreProperties(value = {"wallet"})
     private List<WalletHistory> histories = new ArrayList<>();
 
     public Wallet() {
