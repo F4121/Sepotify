@@ -1,5 +1,6 @@
 package com.enigma.sepotify.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -22,6 +23,7 @@ public class Song {
     private Integer duration;
 
     @Transient
+    @JsonBackReference
     private String artistname;
 
     @Transient
@@ -54,7 +56,7 @@ public class Song {
 
     //relasi transaction
     @OneToMany(mappedBy = "item")
-    @JsonIgnoreProperties("item")
+    @JsonIgnoreProperties(value = {"item","wallet"})
     private List<Transaction> transactions = new ArrayList<>();
 
     public Song() {
@@ -142,7 +144,9 @@ public class Song {
     }
 
     public String getMinutes() {
-        return minutes;
+        int second = this.getDuration() % 60;
+        int minutes = this.getDuration() / 60;
+        return minutes + ":" + second;
     }
 
     public void setMinutes(String minutes) {
