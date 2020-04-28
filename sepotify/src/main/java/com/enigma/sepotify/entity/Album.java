@@ -21,7 +21,7 @@ public class Album {
 
     //relasi song
     @OneToMany(mappedBy = "album")
-    @JsonIgnoreProperties(value = {"album"})
+    @JsonIgnoreProperties(value = {"album","transactions","playlists"})
     private List<Song> songs = new ArrayList<>();
 
     private Double discount;
