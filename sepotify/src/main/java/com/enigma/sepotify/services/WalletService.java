@@ -1,5 +1,6 @@
 package com.enigma.sepotify.services;
 
+import com.enigma.sepotify.entity.Account;
 import com.enigma.sepotify.entity.Wallet;
 import com.enigma.sepotify.entity.WalletHistory;
 import org.springframework.data.domain.Page;
@@ -12,5 +13,7 @@ public interface WalletService {
     public void deleteWallet(String id);
     public void topUpWallet(Wallet wallet);
     public void withdrawlWallet(Wallet wallet);
+    public Boolean isWalletAlready(Wallet wallet);
     public void transactionlWallet(Wallet wallet, Double amount);
+    public Account isOwnerActive(Wallet wallet);
 }

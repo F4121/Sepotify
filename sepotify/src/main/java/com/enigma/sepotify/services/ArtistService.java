@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 public interface ArtistService {
-    public void saveArtist(MultipartFile file, String requestBody) throws JsonProcessingException, IOException;
+    public Artist saveArtist(MultipartFile file, String requestBody) throws JsonProcessingException, IOException;
     public Artist getArtist(String id);
     public Page<Artist> searchArtist(Pageable pageable, Artist searchForm);
     public void deleteArtist(String id);

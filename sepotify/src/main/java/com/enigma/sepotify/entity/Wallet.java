@@ -5,7 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.repository.cdi.Eager;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -35,7 +37,7 @@ public class Wallet {
     private Account owner;
 
     //relasi transactions
-    @OneToMany(mappedBy = "wallet")
+    @OneToMany(mappedBy = "wallet",fetch = FetchType.EAGER)
     @JsonIgnoreProperties(value = {"wallet","item"})
     private List<Transaction> transactions = new ArrayList<>();
 

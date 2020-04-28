@@ -1,5 +1,6 @@
 package com.enigma.sepotify.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
@@ -29,6 +30,7 @@ public class Playlist {
 
     @ManyToOne
     @JoinColumn(name = "account_id")
+    @JsonIgnoreProperties(value = {"playlists","profile","wallet"})
     private Account account;
 
     public Playlist() {

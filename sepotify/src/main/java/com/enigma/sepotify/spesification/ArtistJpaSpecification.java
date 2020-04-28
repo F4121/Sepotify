@@ -16,7 +16,7 @@ public class ArtistJpaSpecification {
             @Override
             public Predicate toPredicate(Root<Artist> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
                 final Collection<Predicate> predicates = new ArrayList<>();
-                Join<Artist, Song> artistSongJoin = root.join("songs",JoinType.INNER);
+                Join<Artist, Song> artistSongJoin = root.join("songs",JoinType.LEFT);
 
                 if (searchForm != null) {
                     if (!StringUtils.isEmpty(searchForm.getName())) {

@@ -2,13 +2,18 @@ package com.enigma.sepotify.services;
 
 import com.enigma.sepotify.entity.Album;
 import com.enigma.sepotify.repository.AlbumRepository;
+import com.enigma.sepotify.spesification.AlbumJpaSpecification;
+import net.minidev.json.JSONObject;
 import org.apache.commons.io.IOUtils;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
@@ -31,73 +36,86 @@ class AlbumServiceDBImplTest {
     Pageable pageable = PageRequest.of(0, 10);
     Album album = new Album("Telisik","First Album",2020,30.0);
 
-    Resource fileResource = new ClassPathResource("/test/ff80818171b47fee0171b482324b0002.jpg");
-    MockMultipartFile firstFile = new MockMultipartFile(
-            "attachments",fileResource.getFilename(),
-            MediaType.MULTIPART_FORM_DATA_VALUE,
-            fileResource.getInputStream());
-
-    AlbumServiceDBImplTest() throws IOException {
+    @BeforeEach
+    public void cleanUp(){
+        albumRepository.deleteAll();
     }
 
     @Test
-    void saveAlbum_should_call_saveAlbum_once() throws Exception {
-        MockMultipartFile jsonFile = new MockMultipartFile("requestBody", "", "application/json", "{\"name\": \"test\"}".getBytes());
-        albumService.saveAlbum(firstFile,jsonFile.toString());
-        Mockito.verify(albumService, Mockito.times(1)).saveAlbum(firstFile, jsonFile.toString());
+    void getAlbumByField_shouldGetAlbum_whenGivenSearchValue() throws IOException {
+        Resource fileResource = new ClassPathResource("/test/ff80818171b47fee0171b482324b0002.jpg");
+        MockMultipartFile firstFile = new MockMultipartFile(
+                "attachments",fileResource.getFilename(),
+                MediaType.MULTIPART_FORM_DATA_VALUE,
+                fileResource.getInputStream());
+        String jsonAlbum = " {\n" +
+                "            \"title\": \"c\"\n" +
+                "} ";
+        Album album1 = albumService.saveAlbum(firstFile, jsonAlbum);
+        albumRepository.save(album1);
+        assertEquals(1, albumService.searchAlbum(PageRequest.of(0,5),album1).getTotalElements());
     }
 
     @Test
-    void saveAlbum_ShouldCreate_1_Album_in_DB_when_an_Album_Saved() throws IOException {
-        String album = "{\n" +
-                "            \"title\": \"Capitol\",\n" +
-                "            \"description\": \"Frank wow yay!\",\n" +
-                "            \"releaseYear\": 1954,\n" +
-                "            \"discount\": 10.0\n" +
-                "}";
-        albumService.saveAlbum(firstFile, album);
-        List<Album> albums = new ArrayList<>();
-        albums.add(this.album);
+    void getAllSong_shouldBe_2InDB_whenDataInDbIs_2() throws IOException {
+        Resource fileResource = new ClassPathResource("/test/ff80818171b47fee0171b482324b0002.jpg");
+        MockMultipartFile firstFile = new MockMultipartFile(
+                "attachments",fileResource.getFilename(),
+                MediaType.MULTIPART_FORM_DATA_VALUE,
+                fileResource.getInputStream());
+        String jsonAlbum = " {\n" +
+                "            \"title\": \"c\"\n" +
+                "} ";
+        Album album1 = albumService.saveAlbum(firstFile, jsonAlbum);
+        Album album2 = albumService.saveAlbum(firstFile, jsonAlbum);
+        assertEquals(2, albumRepository.findAll().size());
+    }
+
+    @Test
+    void deleteAlbum_shouldDelete_1_data_inDb_whenAlbumDeleted() throws IOException {
+        Resource fileResource = new ClassPathResource("/test/ff80818171b47fee0171b482324b0002.jpg");
+        MockMultipartFile firstFile = new MockMultipartFile(
+                "attachments",fileResource.getFilename(),
+                MediaType.MULTIPART_FORM_DATA_VALUE,
+                fileResource.getInputStream());
+        String jsonAlbum = " {\n" +
+                "            \"title\": \"c\"\n" +
+                "} ";
+        Album album1 = albumService.saveAlbum(firstFile, jsonAlbum);
+        Album album2 = albumService.saveAlbum(firstFile, jsonAlbum);
+        albumService.deleteAlbum(album2.getId());
+        assertEquals(1, albumRepository.findAll().size());
+    }
+
+    @Test
+    void saveAlbum_shouldAdd_1_data_inDB_whenAlbumSaved() throws IOException {
+        Resource fileResource = new ClassPathResource("/test/ff80818171b47fee0171b482324b0002.jpg");
+        MockMultipartFile firstFile = new MockMultipartFile(
+                "attachments",fileResource.getFilename(),
+                MediaType.MULTIPART_FORM_DATA_VALUE,
+                fileResource.getInputStream());
+        String jsonAlbum = " {\n" +
+                "            \"title\": \"c\"\n" +
+                "} ";
+        Album expected = albumService.saveAlbum(firstFile, jsonAlbum);
         assertEquals(1,albumRepository.findAll().size());
     }
 
     @Test
-    void saveAlbum_should_callAlbumService_savealbum_once() throws Exception {
-        byte[] image = IOUtils.toByteArray(getClass().getClassLoader().getResourceAsStream("your_pic.jpg"));
-        MockMultipartFile file = new MockMultipartFile("file", "application.properties", MediaType.IMAGE_JPEG_VALUE, image);
-        MockMultipartFile jsonFile = new MockMultipartFile("requestBody", "", "application/json", "{\"json\": \"someValue\"}".getBytes());
-
-        albumService.saveAlbum(file,jsonFile.toString());
-        Mockito.verify(albumService, Mockito.times(1)).saveAlbum(file, jsonFile.toString());
+    void searchAlbum_should_return_id_NotNull() throws Exception {
+        Resource fileResource = new ClassPathResource("/test/ff80818171b47fee0171b482324b0002.jpg");
+        MockMultipartFile firstFile = new MockMultipartFile(
+                "attachments",fileResource.getFilename(),
+                MediaType.MULTIPART_FORM_DATA_VALUE,
+                fileResource.getInputStream());
+        String jsonAlbum = " {\n" +
+                "            \"title\": \"c\"\n" +
+                "} ";
+        Album saveAlbum = albumService.saveAlbum(firstFile, jsonAlbum);
+        assertTrue(saveAlbum.getId()!=null);
     }
 
 
-    @Test
-    void getAlbum_should_call_getAlbum_once() throws Exception {
-        albumService.getAlbum(album.getId());
-        Mockito.verify(albumService, Mockito.times(1)).getAlbum(album.getId());
-    }
 
-    @Test
-    void searchAlbum_should_call_searchAlbum_once() throws Exception {
-        albumService.searchAlbum(pageable, album);
-        Mockito.verify(albumService, Mockito.times(1)).searchAlbum(pageable,album);
-    }
 
-//    @Test
-//    void searchAlbum_should_return_id_NotNull() throws Exception {
-//        Page<Album> albums = albumRepository.findAll(AlbumJpaSpecification.findByCriterias(null), pageable);
-//        RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/album")
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .content(objectMapper.writeValueAsString(album));
-//        mockMvc.perform(requestBuilder);
-//        Mockito. when(albumService.searchAlbum(pageable, album)).thenReturn(album);
-//        assertTrue(albums!=null);
-//    }
-
-    @Test
-    void deleteAlbum_should_call_deleteAlbum_once() throws Exception {
-        albumService.deleteAlbum(album.getId());
-        Mockito.verify(albumService, Mockito.times(1)).deleteAlbum(album.getId());
-    }
 }

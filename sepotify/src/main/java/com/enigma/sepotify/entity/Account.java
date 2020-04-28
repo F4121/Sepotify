@@ -2,6 +2,7 @@ package com.enigma.sepotify.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -22,6 +23,7 @@ public class Account {
 
     //relasi playlist
     @OneToMany(mappedBy = "account")
+    @JsonIgnoreProperties(value = {"account"})
     private List<Playlist> playlists = new ArrayList<>();
 
     //relasi profile
@@ -30,6 +32,7 @@ public class Account {
     private Profile profile;
 
     @OneToOne(mappedBy = "owner")
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @JsonIgnoreProperties(value = {"owner","histories","topUp","withdrawl","transactions"})
     private Wallet wallet;
 

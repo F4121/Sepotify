@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
@@ -43,21 +45,22 @@ class AlbumControllerTest {
     }
 
 //    @Test
-//    void saveAlbum_should_() throws Exception {
+//    void saveAlbum_should_response_200OK() throws Exception {
+//        Resource fileResource = new ClassPathResource("/test/ff80818171b47fee0171b482324b0002.jpg");
+//        MockMultipartFile firstFile = new MockMultipartFile(
+//                "attachments",fileResource.getFilename(),
+//                MediaType.MULTIPART_FORM_DATA_VALUE,
+//                fileResource.getInputStream());
+//
+//        String jsonAlbum = " {\n" +
+//                "            \"title\": \"c\"\n" +
+//                "} ";
 //        Album album = new Album();
-//
-//        MockMultipartFile metadata =
-//                new MockMultipartFile(
-//                        "request",
-//                        "request",
-//                        MediaType.APPLICATION_JSON_VALUE,
-//                        objectMapper.writeValueAsString(request).getBytes(StandardCharsets.UTF_8));
-//
-//        Mockito.when(albumService.saveAlbum(new ,requestBody)).thenReturn();
-//
+//        Mockito.when(albumService.saveAlbum(firstFile,jsonAlbum)).thenReturn(album);
+//        albumService.saveAlbum(firstFile,jsonAlbum);
 //        RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/album")
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .content(objectMapper.writeValueAsString(artist));
+//                .contentType(MediaType.MULTIPART_FORM_DATA)
+//                .content(objectMapper.writeValueAsString(jsonAlbum));
 //        mockMvc.perform(requestBuilder).andExpect(MockMvcResultMatchers.status().isOk());
 //    }
 
@@ -77,7 +80,7 @@ class AlbumControllerTest {
         Album album =  new Album();
         album.setId("123");
         albumService.searchAlbum(null,album);
-        RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/album/search")
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/album/search?page=0&size=10")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(album));
         mockMvc.perform(requestBuilder).andExpect(MockMvcResultMatchers.status().isOk());

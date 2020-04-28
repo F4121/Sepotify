@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 public interface GenreService {
-    public void saveGenre(Genre genre);
+    public Genre saveGenre(Genre genre);
     public Genre getGenre(String id);
     public void deleteGenre(String id);
     public Page<Genre> searchGenre(Pageable pageable, Genre searchForm);

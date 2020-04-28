@@ -20,7 +20,7 @@ public class Album {
     private Integer releaseYear;
 
     //relasi song
-    @OneToMany(mappedBy = "album")
+    @OneToMany(mappedBy = "album",fetch = FetchType.EAGER)
     @JsonIgnoreProperties(value = {"album","transactions","playlists"})
     private List<Song> songs = new ArrayList<>();
 

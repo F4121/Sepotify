@@ -30,7 +30,6 @@ public class WalletServiceDBImpl implements WalletService {
 
     @Override
     public Wallet saveWallet(Wallet wallet) {
-        this.isOwnerActive(wallet);
         this.isWalletAlready(wallet);
         return walletRepository.save(wallet);
     }
@@ -113,7 +112,7 @@ public class WalletServiceDBImpl implements WalletService {
     }
 
     public Boolean isWalletAlready(Wallet wallet){
-        Account account = accountService.getAccount(this.getWallet(wallet.getId()).getOwner().getId());
+        Account account = accountService.getAccount(wallet.getOwner().getId());
         if(account.getWallet() != null){
             throw new AccountIsAlreadyHaveWalletException(account.getId());
         }

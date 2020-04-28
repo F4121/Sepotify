@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 public interface AlbumService {
-    public void saveAlbum(MultipartFile file, String requestBody) throws JsonProcessingException, IOException;
+    public Album saveAlbum(MultipartFile file, String requestBody) throws JsonProcessingException, IOException;
     public Album getAlbum(String id);
     public Page<Album> searchAlbum(Pageable pageable, Album searchForm);
     public void deleteAlbum(String id);

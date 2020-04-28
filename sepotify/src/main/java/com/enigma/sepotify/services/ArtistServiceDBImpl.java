@@ -30,7 +30,7 @@ public class ArtistServiceDBImpl implements ArtistService{
     ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
-    public void saveArtist(MultipartFile file, String requestBody) throws IOException {
+    public Artist saveArtist(MultipartFile file, String requestBody) throws IOException {
         Artist artist = objectMapper.readValue(requestBody, Artist.class);
         Integer size = Math.toIntExact(file.getSize());
         if (size > 1048576){
@@ -43,7 +43,7 @@ public class ArtistServiceDBImpl implements ArtistService{
                         FilenameUtils.getExtension(file.getOriginalFilename()));
                 String path = fileUtil.store(file, destination);
                 artist.setPhoto(path);
-                artistRepository.save(artist);
+               return artistRepository.save(artist);
             }catch (IOException ieo){
                 throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "something happened during file upload process");
             }

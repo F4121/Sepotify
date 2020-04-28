@@ -1,5 +1,6 @@
 package com.enigma.sepotify.util;
 
+import com.enigma.sepotify.exception.CustomFileNotFoundException;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Component;
@@ -25,14 +26,14 @@ public class FileUtilImpl implements FileUtil{
     }
 
     @Override
-    public Resource read(String filename) throws FileNotFoundException {
+    public Resource read(String filename) {
         try{
             Path file = storageLocation.resolve(filename).normalize();
             Resource resource = new UrlResource(file.toUri());
             if (!resource.exists()) throw new FileNotFoundException(filename);
             return resource;
         } catch (MalformedURLException | FileNotFoundException e) {
-            throw new FileNotFoundException(filename);
+            throw new CustomFileNotFoundException(filename);
         }
     }
 }

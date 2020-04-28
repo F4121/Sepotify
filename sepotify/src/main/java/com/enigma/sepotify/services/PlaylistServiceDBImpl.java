@@ -23,9 +23,9 @@ public class PlaylistServiceDBImpl implements PlaylistService{
 
 
     @Override
-    public void savePlaylist(Playlist playlist) {
+    public Playlist savePlaylist(Playlist playlist) {
         if (playlist.getId()!=null){
-            playlistRepository.save(playlist);
+            return playlistRepository.save(playlist);
         }else {
             Account account = accountService.getAccount(playlist.getAccount().getId());
             if (account == null) {
@@ -34,7 +34,7 @@ public class PlaylistServiceDBImpl implements PlaylistService{
                 if (account.getActive() == false) {
                     throw new AccountIsNotActiveException(playlist.getAccount().getId());
                 } else {
-                    playlistRepository.save(playlist);
+                   return playlistRepository.save(playlist);
                 }
             }
         }

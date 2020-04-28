@@ -30,7 +30,7 @@ public class AlbumServiceDBImpl implements AlbumService{
     ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
-    public void saveAlbum(MultipartFile file, String requestBody) throws JsonProcessingException, IOException {
+    public Album saveAlbum(MultipartFile file, String requestBody) throws JsonProcessingException, IOException {
         Album album = objectMapper.readValue(requestBody, Album.class);
         try{
             albumRepository.save(album);
@@ -39,7 +39,7 @@ public class AlbumServiceDBImpl implements AlbumService{
                     FilenameUtils.getExtension(file.getOriginalFilename()));
             String path = fileUtil.store(file, destinaton);
             album.setImage(path);
-            albumRepository.save(album);
+            return albumRepository.save(album);
         } catch (IOException ioe){
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,"something happened during file upload process");
         }
