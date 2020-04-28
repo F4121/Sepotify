@@ -2,6 +2,7 @@ package com.enigma.sepotify.entity;
 
 import com.enigma.sepotify.enums.GenderEnum;
 import com.enigma.sepotify.enums.HistoryTypeEnum;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -25,8 +26,13 @@ public class WalletHistory {
     //relasi wallet
     @ManyToOne
     @JoinColumn(name = "wallet_id")
-    @JsonIgnoreProperties(value = {"histories"})
+    @JsonBackReference(value = "wallet")
+//    @JsonIgnoreProperties(value = {"histories","transactions","owner"})
     private Wallet wallet;
+
+    @Transient
+    @JsonBackReference(value = "wallet-id")
+    private String walletId;
 
     public WalletHistory() {
     }
@@ -69,5 +75,13 @@ public class WalletHistory {
 
     public void setWallet(Wallet wallet) {
         this.wallet = wallet;
+    }
+
+    public String getWalletId() {
+        return walletId;
+    }
+
+    public void setWalletId(String walletId) {
+        this.walletId = walletId;
     }
 }
