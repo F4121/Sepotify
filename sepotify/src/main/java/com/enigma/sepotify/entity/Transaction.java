@@ -1,5 +1,6 @@
 package com.enigma.sepotify.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -23,13 +24,15 @@ public class Transaction {
 
     @ManyToOne
     @JoinColumn(name = "item_id")
-    @JsonIgnoreProperties(value = {"transactions"})
+    @JsonIgnoreProperties(value = {"transactions","duration","playlists"})
     private Song item;
 
     @Transient
+    @JsonBackReference(value = "album-song")
     private String album;
 
     @Transient
+    @JsonBackReference(value = "items-song")
     private List<Song> items = new ArrayList<>();
 
     @ManyToOne
