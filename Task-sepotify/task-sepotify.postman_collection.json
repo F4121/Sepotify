@@ -1,0 +1,1075 @@
+{
+	"info": {
+		"_postman_id": "e3f4abf2-981d-401c-8bf7-ad6728eb2b20",
+		"name": "task-sepotify",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Artist",
+			"item": [
+				{
+					"name": "Delete Artist",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t \"id\" : \"ff80818171b22dc60171b2309b580000\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:9080/artist",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"artist"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save Artist",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"value": "",
+									"type": "file"
+								},
+								{
+									"key": "requestBody",
+									"value": "{\n    \"id\": \"ff80818171b9838f0171b9d069fa0003\",\n    \"name\": \"Frank Sinatra\",\n    \"debutYear\": 1935,\n    \"genderEnum\": \"MALE\",\n    \"title\": null,\n    \"biography\": \"Ol' Blue Eyes\"\n  }",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:9080/artist",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"artist"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Artist",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"a\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:9080/artist/search?page=0&size=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"artist",
+								"search"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET BY ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9080/artist/ff80818171b9838f0171b9d069fa0003",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"artist",
+								"ff80818171b9838f0171b9d069fa0003"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Photo Artist",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9080/artists/photos/ff80818171b34cbf0171b34d10230000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"artists",
+								"photos",
+								"ff80818171b34cbf0171b34d10230000"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Genre",
+			"item": [
+				{
+					"name": "Save Genre",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t \"name\": \"Jazz\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:9080/genre",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"genre"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Genre By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9080/genre/ff80818171b385a20171b385c5ca0000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"genre",
+								"ff80818171b385a20171b385c5ca0000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Genre",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":\"ff80818171b385a20171b385c5ca0000\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:9080/genre",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"genre"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Genre",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n            \"name\": \"\"\n }"
+						},
+						"url": {
+							"raw": "http://localhost:9080/genre/search?page=0&size=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"genre",
+								"search"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Album",
+			"item": [
+				{
+					"name": "Get Album By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9080/album/ff80818171b3b2d10171b3b8b5d70000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"album",
+								"ff80818171b3b2d10171b3b8b5d70000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save Album",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"value": "",
+									"type": "file"
+								},
+								{
+									"key": "requestBody",
+									"value": "{\n            \"title\": \"Capitol\",\n            \"description\": \"Frank wow yay!\",\n            \"releaseYear\": 1954,\n            \"discount\": 10.0\n}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:9080/album",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"album"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Album",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":\"ff80818171b3b2d10171b3c00ade0001\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:9080/album",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"album"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Album",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n            \"title\": \"c\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:9080/album/search?page=0&size=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"album",
+								"search"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show Photos Album",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9080/album/photos/ff80818171b467dd0171b46e4a260001",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"album",
+								"photos",
+								"ff80818171b467dd0171b46e4a260001"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Song",
+			"item": [
+				{
+					"name": "Save Song",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\t\t\"id\" : \"ff80818171ba302d0171ba31788a0000\",\n            \"title\": \"Close to You\",\n            \"releaseYear\": 1954,\n            \"duration\": 340,\n            \"genre\": {\n            \t\"id\" : \"ff80818171b9838f0171b9c6e31d0002\"\n            },\n            \"album\": {\n            \t\"id\" : \"ff80818171ba35f60171ba3ecc480000\"\n            },\n            \"artist\": {\n            \t\"id\" : \"ff80818171b9838f0171b9d069fa0003\"\n            },\n            \"price\": 15000.0\n }"
+						},
+						"url": {
+							"raw": "http://localhost:9080/song",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"song"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Song By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9080/song/ff80818171b3e13c0171b3e6eb630000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"song",
+								"ff80818171b3e13c0171b3e6eb630000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Song",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":\"ff80818171b3e13c0171b3e6eb630000\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:9080/song",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"song"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Song",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n\t\"title\": \"you\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:9080/song/search?page=0&size=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"song",
+								"search"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Playlist",
+			"item": [
+				{
+					"name": "Save Playlist",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"Danilla Telisik\",\n\t\"public\": true,\n\t\"account\" : {\n\t\t\"id\" : \"ff80818171bb18c10171bb1a74e20000\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "http://localhost:9080/playlist",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"playlist"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Playlist By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9080/playlist/ff80818171b42e7d0171b42f17870005",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"playlist",
+								"ff80818171b42e7d0171b42f17870005"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Playlist",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":\"ff80818171b42e7d0171b42f17870005\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:9080/playlist",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"playlist"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search By Field",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\n            \"name\": \"Danilla Telisik\",\n            \"songs\": [],\n            \"author\": null,\n            \"public\": true\n  }"
+						},
+						"url": {
+							"raw": "http://localhost:9080/playlist/search?page=0&size=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"playlist",
+								"search"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "set song in playlist",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\t\t\"id\": \"ff80818171bb18c10171bb1a9fc60001\",\n\t\t\t\"songs\": [\n                {\n                    \"id\": \"ff80818171bb18c10171bb1df88a0002\"\n                }\n\t\t]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9080/playlist",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"playlist"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Transaction",
+			"item": [
+				{
+					"name": "Save Transaction",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"items\" : [\n\t\t{\n\t\t\"id\" : \"ff80818171ba302d0171ba31788a0000\"\n\t\t},\n\t\t{\n\t\t\"id\" : \"ff80818171ba35f60171ba4245950001\"\n\t\t},\n\t\t{\n\t\t\"id\" : \"ff80818171ba35f60171ba42edfd0002\"\n\t\t}\n\t\t],\n\t\"wallet\" : {\n\t\t\"id\" : \"ff80818171b8f8c80171b8fcc42b0001\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "http://localhost:9080/transaction",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"transaction"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "Get Account",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"ff80818171b73a180171b73a4b2e0000\",\n    \"isActive\": true\n}"
+						},
+						"url": {
+							"raw": "localhost:9080/account/ff80818171bb18c10171bb1a74e20000",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"account",
+								"ff80818171bb18c10171bb1a74e20000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Account Active",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"ff80818171b73a180171b73a4b2e0000\",\n    \"isActive\": true\n}"
+						},
+						"url": {
+							"raw": "localhost:9080/account",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"account"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save Account",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"isActive\": true\n}"
+						},
+						"url": {
+							"raw": "localhost:9080/account",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"account"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Account",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"profile\" : {\n\t\t\"firstName\": \"villaport\",\n\t\t\"middleName\" : \"stevend\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "http://localhost:9080/account/search?page=0&size=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"account",
+								"search"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Profile",
+			"item": [
+				{
+					"name": "Save Profile",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"firstName\" : \"Villaport\",\n\t\"middleName\" : \"\",\n\t\"lastName\" : \"Noire\",\n\t\"gender\" : 0,\n\t\"email\" : \"villaport@rocket.mail.com\",\n\t\"phone\" : \"984038449\",\n\t\"birthdate\" : \"13-01-1997\",\n\t\"location\" : \"Jl. Mangun Sarkoro no 34\",\n\t\"account\" : {\n\t\t\"id\" : \"ff80818171b8eab40171b8f29a540001\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "localhost:9080/profile",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9080/profile/ff80818171b73a180171b73bbde60001",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"profile",
+								"ff80818171b73a180171b73bbde60001"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Profile",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\" : \"ff80818171b8f5750171b8f59e3d0000\"\n}"
+						},
+						"url": {
+							"raw": "localhost:9080/profile",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Wallet",
+			"item": [
+				{
+					"name": "Get Wallet",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9080/wallet/ff80818171b791720171b791f2e40000",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"wallet",
+								"ff80818171b791720171b791f2e40000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save Wallet",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"balance\" : 500000.00,\n\t\"owner\" : {\n\t\t\"id\" : \"ff80818171b8eab40171b8f29a540001\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "localhost:9080/wallet",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"wallet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Top Up Wallet",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": \"ff80818171b791720171b791f2e40000\",\n\t\"topUp\" : 15000.00\n}"
+						},
+						"url": {
+							"raw": "localhost:9080/wallet/topup",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"wallet",
+								"topup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Withdrawl Wallet",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": \"ff80818171b791720171b791f2e40000\",\n\t\"withdrawl\" : 15000.00\n}"
+						},
+						"url": {
+							"raw": "localhost:9080/wallet/withdrawl",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"wallet",
+								"withdrawl"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Wallet History",
+			"item": [],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
